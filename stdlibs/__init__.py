@@ -313,7 +313,7 @@ module_names = frozenset(
     }
 )
 
-if sys.version_info >= (3, 10):
+if sys.version_info >= (3, 10):  # pragma: nocover
     module_names = frozenset(module_names | sys.stdlib_module_names)
 
 __author__ = "John Reese"
