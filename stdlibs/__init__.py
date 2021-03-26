@@ -5,7 +5,10 @@
 List of packages in the stdlib
 """
 
+__author__ = "John Reese"
 import sys
+
+from .__version__ import __version__
 
 module_names = frozenset(
     {
@@ -315,6 +318,3 @@ module_names = frozenset(
 
 if sys.version_info >= (3, 10):  # pragma: nocover
     module_names = frozenset(module_names | sys.stdlib_module_names)
-
-__author__ = "John Reese"
-__version__ = "0"
