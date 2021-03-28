@@ -7,11 +7,12 @@ List of packages in the stdlib
 
 __author__ = "John Reese"
 
-import pkgutil
+import importlib
 import sys
-from typing import FrozenSet, Optional
+from typing import Optional
 
 from .__version__ import __version__
+from .py3 import module_names
 
 ALL = "all"
 
@@ -32,56 +33,23 @@ KNOWN_VERSIONS = [
     "3.8",
     "3.9",
     "3.10",
-    "all",
-    "all2",
-    "all3",
 ]
 
 
-class LazyFileSet:
-    _names: Optional[FrozenSet[str]] = None
-
-    def __init__(self, filename: str):
-        if filename[:-4] not in KNOWN_VERSIONS:
-            raise ValueError(f"No such list: {filename}")
-        self.filename = filename
-
-    def _load(self):
-        if self._names is None:
-            self._names = frozenset(
-                pkgutil.get_data("stdlibs", f"lists/{self.filename}")
-                .decode()
-                .splitlines()
-            )
-
-    def __contains__(self, x):
-        if "." in x:
-            raise ValueError(f"{x} has a dot and is not a top-level name")
-        self._load()
-        return x in self._names
-
-    def __iter__(self):
-        self._load()
-        return iter(self._names)
-
-    def __repr__(self) -> str:
-        return f"<LazyFileSet {self.filename} loaded={self._names is not None}>"
-
-
-def stdlib_top_level(version: Optional[str] = None):
+def stdlib_module_names(version: Optional[str] = None):
     if version is None:
-        version = "%d.%d" % sys.version_info[:2]
-        return LazyFileSet(f"{version}.txt")
+        version = "%d%d" % sys.version_info[:2]
+        modname = f".py{version}"
     elif version == ALL:
-        return LazyFileSet("all.txt")
+        modname = ".py"
     else:
-        version = ".".join(version.split(".")[:2])
-        return LazyFileSet(f"{version}.txt")
+        version = "".join(version.split(".")[:2])
+        modname = f".py{version}"
 
+    return importlib.import_module(modname, __package__).module_names  # type: ignore
 
-module_names = stdlib_top_level("all3")
 
 __all__ = [
-    "stdlib_top_level",
+    "stdlib_module_names",
     "module_names",
 ]
