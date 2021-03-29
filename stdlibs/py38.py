@@ -284,7 +284,6 @@ module_names = frozenset(
         "telnetlib",
         "tempfile",
         "termios",
-        "test",
         "textwrap",
         "this",
         "threading",

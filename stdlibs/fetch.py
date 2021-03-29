@@ -141,7 +141,7 @@ def regen(version: str) -> Set[str]:
         else:
             name = p.with_suffix("").name
             name = name.split(".")[0]  # __phello__.foo
-            if name not in ("__pycache__", "site-packages"):
+            if name not in ("__pycache__", "site-packages", "test"):
                 names.append(name)
 
     for subdir in (
