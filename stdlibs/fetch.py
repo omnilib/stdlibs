@@ -179,7 +179,7 @@ class ExtensionVisitor(cst.CSTVisitor):
         d = m.extract(
             node,
             m.Call(
-                func=m.Name("Extension"),
+                func=m.OneOf(m.Name("Extension"), m.Name("addMacExtension")),
                 args=(
                     m.Arg(value=m.SaveMatchedNode(m.SimpleString(), "extension_name")),
                     m.ZeroOrMore(m.DoNotCare()),
@@ -188,6 +188,19 @@ class ExtensionVisitor(cst.CSTVisitor):
         )
         if d:
             self.extension_names.append(d["extension_name"].evaluated_value)
+
+    def visit_Assign(self, node: cst.Assign) -> Optional[bool]:
+        d = m.extract(
+            node,
+            m.Assign(
+                targets=(m.AssignTarget(target=m.Name("CARBON_EXTS")),),
+                value=m.SaveMatchedNode(m.List(), "list"),
+            ),
+        )
+        if d:
+            for item in d["list"].elements:
+                if isinstance(item.value, cst.SimpleString):
+                    self.extension_names.append(item.value.evaluated_value)
 
 
 # This is from usort
