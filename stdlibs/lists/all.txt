@@ -210,6 +210,7 @@ aepack
 aetools
 aetypes
 aifc
+al
 antigravity
 anydbm
 applesingle
@@ -243,12 +244,14 @@ cPickle
 cProfile
 cStringIO
 calendar
+cd
 cddb
 cdplayer
 cfmfile
 cgi
 cgitb
 chunk
+cl
 cmath
 cmd
 cmp
@@ -302,7 +305,9 @@ filecmp
 fileinput
 find
 findertools
+fl
 flp
+fm
 fmt
 fnmatch
 formatter
@@ -321,6 +326,7 @@ gestalt
 getopt
 getpass
 gettext
+gl
 glob
 gopherlib
 graphlib
@@ -343,6 +349,7 @@ idlelib
 ihooks
 imageop
 imaplib
+imgfile
 imghdr
 imp
 importlib
@@ -428,6 +435,7 @@ pre
 profile
 pstats
 pty
+pure
 pwd
 py_compile
 pyclbr
@@ -464,6 +472,7 @@ secrets
 select
 selectors
 sets
+sgi
 sgmllib
 sha
 shelve
@@ -496,6 +505,7 @@ subprocess
 sunau
 sunaudio
 sunaudiodev
+sv
 symbol
 symtable
 sys

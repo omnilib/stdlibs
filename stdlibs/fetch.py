@@ -30,6 +30,7 @@ RELEASES = {
 
 MODULE_DEF_RE = re.compile(r"PyModuleDef .*? = \{\s*[^,]*,\s*([^,}]+)[,}]")
 MULTILINE_COMMENT_RE = re.compile(r"/\*.*?\*/")
+PY2_INITMODULE_RE = re.compile(r'.Py_InitModule\d?\(\s*(?!\))(.*?),')
 INITTAB_RE = re.compile(r'{"([^"]+)", \S+?\}')
 
 # lib2to3 outputs code that doesn't parse, so just omit these lines
@@ -125,7 +126,7 @@ def regen(version: str) -> Sequence[str]:
             except:
                 data = p.read_text(encoding="latin-1")
 
-            match = MODULE_DEF_RE.search(data)
+            match = MODULE_DEF_RE.search(data) or PY2_INITMODULE_RE.search(data)
             if match:
                 s = MULTILINE_COMMENT_RE.sub("", match.group(1)).strip()
                 if s.startswith(".m_name"):
@@ -139,6 +140,7 @@ def regen(version: str) -> Sequence[str]:
                     names.append(p.name.split("module")[0])
                 else:
                     print(f"Unknown module for {s} in {p}, skipped")
+
 
     # Some names are listed differently/better here; cjkcodecs and _io/io
     for path in (

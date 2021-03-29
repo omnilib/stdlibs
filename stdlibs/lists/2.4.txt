@@ -126,6 +126,7 @@ aepack
 aetools
 aetypes
 aifc
+al
 anydbm
 applesingle
 appletrawmain
@@ -152,12 +153,14 @@ bz2
 cPickle
 cStringIO
 calendar
+cd
 cddb
 cdplayer
 cfmfile
 cgi
 cgitb
 chunk
+cl
 cmath
 cmd
 cmp
@@ -201,10 +204,14 @@ filecmp
 fileinput
 find
 findertools
+fl
 flp
+fm
 fmt
 fnmatch
 formatter
+fpectl
+fpetest
 fpformat
 ftplib
 gc
@@ -214,6 +221,7 @@ gestalt
 getopt
 getpass
 gettext
+gl
 glob
 gopherlib
 grep
@@ -232,6 +240,7 @@ idlelib
 ihooks
 imageop
 imaplib
+imgfile
 imghdr
 imp
 imputil
@@ -304,6 +313,7 @@ pprint
 profile
 pstats
 pty
+pure
 pwd
 py_compile
 pyclbr
@@ -332,6 +342,7 @@ rourl2path
 sched
 select
 sets
+sgi
 sgmllib
 sha
 shelve
@@ -359,6 +370,7 @@ subprocess
 sunau
 sunaudio
 sunaudiodev
+sv
 symbol
 symtable
 sys
@@ -411,10 +423,12 @@ webbrowser
 whatsound
 whichdb
 whrandom
+winsound
 xdrlib
 xml
 xmllib
 xmlrpclib
+xx
 xxsubtype
 zipfile
 zipimport

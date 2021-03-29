@@ -124,6 +124,7 @@ _json
 _locale
 _lsprof
 _md5
+_msi
 _multibytecodec
 _multiprocessing
 _osx_support
@@ -155,6 +156,7 @@ aepack
 aetools
 aetypes
 aifc
+al
 antigravity
 anydbm
 applesingle
@@ -185,12 +187,14 @@ cPickle
 cProfile
 cStringIO
 calendar
+cd
 cddb
 cdplayer
 cfmfile
 cgi
 cgitb
 chunk
+cl
 cmath
 cmd
 cmp
@@ -237,10 +241,14 @@ filecmp
 fileinput
 find
 findertools
+fl
 flp
+fm
 fmt
 fnmatch
 formatter
+fpectl
+fpetest
 fpformat
 fractions
 ftplib
@@ -254,6 +262,7 @@ gestalt
 getopt
 getpass
 gettext
+gl
 glob
 gopherlib
 grep
@@ -273,6 +282,7 @@ idlelib
 ihooks
 imageop
 imaplib
+imgfile
 imghdr
 imp
 importlib
@@ -354,6 +364,7 @@ pre
 profile
 pstats
 pty
+pure
 pwd
 py_compile
 pyclbr
@@ -386,6 +397,7 @@ runpy
 sched
 select
 sets
+sgi
 sgmllib
 sha
 shelve
@@ -416,6 +428,7 @@ subprocess
 sunau
 sunaudio
 sunaudiodev
+sv
 symbol
 symtable
 sys
@@ -471,12 +484,14 @@ webbrowser
 whatsound
 whichdb
 whrandom
+winsound
 wsgiref
 xdrlib
 xml
 xmllib
 xmlrpclib
 xreadlines
+xx
 xxsubtype
 zipfile
 zipimport
