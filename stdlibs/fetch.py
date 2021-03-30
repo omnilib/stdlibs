@@ -5,7 +5,7 @@ import re
 import subprocess
 import sys
 from pathlib import Path
-from typing import Optional, Set
+from typing import List, Optional, Set
 
 import libcst as cst
 import libcst.matchers as m
@@ -72,9 +72,9 @@ def write_tmpl(name: str, data: Set[str]) -> None:
     (BASE_DIR / name).write_text(GENERATED_TMPL.format(lines=lines))
 
 
-def regen_all():
-    all2 = set()
-    all3 = set()
+def regen_all() -> None:
+    all2: Set[str] = set()
+    all3: Set[str] = set()
     for v in RELEASES:
         names = regen(v)
         if v.startswith("2"):
@@ -196,12 +196,12 @@ def regen(version: str) -> Set[str]:
 
     write_tmpl(f"py{version.replace('.', '')}.py", set(names))
     print(f"{version} done.")
-    return set(names)  # type: ignore
+    return set(names)
 
 
 class ExtensionVisitor(cst.CSTVisitor):
-    def __init__(self):
-        self.extension_names = []
+    def __init__(self) -> None:
+        self.extension_names: List[str] = []
 
     def visit_Call(self, node: cst.Call) -> None:
         # print(node)

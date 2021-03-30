@@ -9,7 +9,7 @@ __author__ = "John Reese"
 
 import importlib
 import sys
-from typing import Optional
+from typing import FrozenSet, Optional
 
 from .__version__ import __version__
 from .py3 import module_names
@@ -36,7 +36,7 @@ KNOWN_VERSIONS = [
 ]
 
 
-def stdlib_module_names(version: Optional[str] = None):
+def stdlib_module_names(version: Optional[str] = None) -> FrozenSet[str]:
     if version is None:
         version = "%d%d" % sys.version_info[:2]
         modname = f".py{version}"

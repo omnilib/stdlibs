@@ -11,17 +11,17 @@ import stdlibs
 
 
 class StdlibsTest(TestCase):
-    def test_module_names(self):
+    def test_module_names(self) -> None:
         for name in ("re", "os", "sys", "posixpath", "re", "_sre", "xmlrpc"):
             self.assertIn(name, stdlibs.module_names)
         self.assertNotIn("__main__", stdlibs.module_names)
 
-    def test_default_version(self):
+    def test_default_version(self) -> None:
         with mock.patch("stdlibs.sys.version_info", (3, 7, 5)):
             names = stdlibs.stdlib_module_names()
         self.assertEqual(names, stdlibs.stdlib_module_names("3.7"))
 
-    def test_api(self):
+    def test_api(self) -> None:
         names = stdlibs.stdlib_module_names("3.8")
         self.assertIn("posixpath", names)
 
@@ -29,7 +29,7 @@ class StdlibsTest(TestCase):
         with self.assertRaises(ImportError):
             stdlibs.stdlib_module_names("1.0")
 
-    def test_all_my_modules_are_there(self):
+    def test_all_my_modules_are_there(self) -> None:
         # Gets only the top-level names we should have on this version
         names = stdlibs.stdlib_module_names(None)
         for module in Path(os.__file__).parent.glob("*.py"):
@@ -39,13 +39,13 @@ class StdlibsTest(TestCase):
                 continue
             self.assertIn(name, names)
 
-    def test_all23(self):
+    def test_all23(self) -> None:
         self.assertEqual(
             stdlibs.stdlib_module_names("2") | stdlibs.stdlib_module_names("3"),
             stdlibs.stdlib_module_names("all"),
         )
 
-    def test_readme_example(self):
+    def test_readme_example(self) -> None:
         self.assertEqual(
             ["3.7", "3.8", "3.9", "3.10"],
             [
