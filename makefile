@@ -21,7 +21,7 @@ format:
 
 lint:
 	python -m mypy $(SRCS)
-	python -m flake8 $(SRCS)
+	python -m flake8 --ignore=W503 $(SRCS)
 	python -m ufmt check $(SRCS)
 
 test:
