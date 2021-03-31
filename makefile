@@ -28,6 +28,7 @@ test:
 	python -m coverage run -m $(SRCS).tests
 	python -m coverage report
 	python -m coverage html
+	python -m doctest README.md
 
 html: .venv README.md docs/*.rst docs/conf.py
 	source .venv/bin/activate && sphinx-build -b html docs html
