@@ -20,7 +20,7 @@ format:
 	python -m ufmt format $(SRCS)
 
 lint:
-	python -m mypy $(SRCS)
+	python -m mypy --strict $(SRCS)
 	python -m flake8 $(SRCS)
 	python -m ufmt check $(SRCS)
 
