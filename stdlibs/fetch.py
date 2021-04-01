@@ -135,6 +135,9 @@ def regen(version: str) -> Set[str]:
         if p.name.startswith(("plat-", "lib-")):
             # 2.x platform dirs, or tk support
             for path in p.iterdir():
+                # lib-tk/test on 2.7
+                if path.name in ("test",):
+                    continue
                 # TODO plat-mac/lib-scriptpackages
                 if path.is_dir() and not path.name.startswith("lib-"):
                     names.append(path.name)
