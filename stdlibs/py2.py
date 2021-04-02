@@ -449,7 +449,6 @@ module_names = frozenset(
         "tempfile",
         "terminalcommand",
         "termios",
-        "test",
         "textwrap",
         "this",
         "thread",
