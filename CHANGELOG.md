@@ -1,6 +1,21 @@
 stdlibs
 =======
 
+v2021.4.1
+---------
+
+Bugfix release
+
+* Remove "test" module from py2x stdlibs (#4)
+* Fix documentation and run doctest on README (#3)
+
+```
+$ git shortlog -s v2021.3.30...v2021.4.1
+     3	John Reese
+     2	Tim Hatch
+```
+
+
 v2021.3.30
 ----------
 
