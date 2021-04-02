@@ -23,16 +23,18 @@ superset of top-level names you may have, and a superset of those in
 True
 >>> print("peg_parser" in module_names)  # 3.9+
 True
+
 ```
 
 If you need a specific version, those are available as other modules:
 
 ```pycon
 >>> from stdlibs.py36 import module_names as module_names_py36
->>> print("os" in module_names)
+>>> print("os" in module_names_py36)
 True
 >>> print("peg_parser" in module_names_py36)
 False
+
 ```
 
 If you intend to process more than one version, you may find the string api
@@ -46,13 +48,15 @@ easier:
 >>> sorted(stdlib_module_names("3.7") - stdlib_module_names("3.6"))
 ['_abc', '_contextvars', '_py_abc', '_queue', '_uuid', '_xxtestfuzz', 'contextvars', 'dataclasses']
 >>>
->>> from moreorless.click import echo_color_unified_diff
+>>> from moreorless.click import unified_diff
 >>> prev = None
+>>> buf = []
 >>> for v in KNOWN_VERSIONS:
 ...     cur = ''.join([f"{name}\n" for name in sorted(stdlib_module_names(v))])
 ...     if prev:
-...             echo_color_unified_diff(prev, cur, f"new-in-{v}")
+...         buf.append(unified_diff(prev, cur, f"new-in-{v}"))
 ...     prev = cur
+>>> print(''.join(''.join(buf).splitlines(True)[:10]), end='')
 --- a/new-in-2.4
 +++ b/new-in-2.4
 @@ -19,7 +19,6 @@
@@ -63,7 +67,7 @@ easier:
  FILE
  FL
  FileDialog
-<snip>
+
 ```
 
 Install
