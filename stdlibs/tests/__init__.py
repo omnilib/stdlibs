@@ -4,8 +4,7 @@
 import os
 import sys
 from pathlib import Path
-from unittest import TestCase
-from unittest import mock
+from unittest import mock, TestCase
 
 import stdlibs
 
