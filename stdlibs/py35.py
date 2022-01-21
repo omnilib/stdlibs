@@ -12,6 +12,7 @@ module_names = frozenset(
         "STROPTS",
         "TYPES",
         "__future__",
+        "__hello__",
         "__phello__",
         "_ast",
         "_bisect",

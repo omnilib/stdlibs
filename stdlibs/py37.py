@@ -6,6 +6,7 @@
 module_names = frozenset(
     [
         "__future__",
+        "__hello__",
         "__phello__",
         "_abc",
         "_ast",

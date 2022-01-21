@@ -34,7 +34,10 @@ RELEASES = {
 MODULE_DEF_RE = re.compile(r"PyModuleDef .*? = \{\s*[^,]*,\s*([^,}]+)[,}]")
 MULTILINE_COMMENT_RE = re.compile(r"/\*.*?\*/")
 PY2_INITMODULE_RE = re.compile(r".Py_InitModule\d?\(\s*(?!\))(.*?),")
-INITTAB_RE = re.compile(r'{"([^"]+)", \S+?\}')
+INITTAB_SELECTOR_RE = re.compile(
+    r"(?:struct _(?:frozen|module_alias) .*?|_PyImport_\w+)\[\] = \{([\w\W]+?)\n\};"
+)
+INITTAB_RE = re.compile(r'{"([^"]+)", ')
 
 # lib2to3 outputs code that doesn't parse, so just omit these lines
 PY2_LINES_TO_OMIT = [
@@ -180,22 +183,19 @@ def regen(version: str) -> Set[str]:
     for path in (
         base_path / "PC" / "config.c",
         base_path / "PC" / "os2vacpp" / "config.c",
+        base_path / "Python" / "frozen.c",
     ):
         if not path.exists():
             continue
-        for match in INITTAB_RE.finditer(
-            path.read_text().split("_PyImport_Inittab[] = {")[1]
-        ):
-            if match.group(1) == "__main__":
-                continue
-            names.append(match.group(1))
-
-    # Aliases
-    version_tuple = tuple(int(x) for x in version.split("."))
-    if version_tuple >= (3, 3):
-        names.append("_frozen_importlib")
-    if version_tuple >= (3, 5):
-        names.append("_frozen_importlib_external")
+        found = False
+        for block in INITTAB_SELECTOR_RE.findall(path.read_text()):
+            found = True
+            for match in INITTAB_RE.finditer(block):
+                if match.group(1) == "__main__":
+                    continue
+                names.append(match.group(1).split(".")[0])
+        if not found:
+            print(f"Missing inittab in {path}")
 
     write_tmpl(f"py{version.replace('.', '')}.py", set(names))
     print(f"{version} done.")
