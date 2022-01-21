@@ -46,7 +46,7 @@ class StdlibsTest(TestCase):
 
     def test_readme_example(self) -> None:
         self.assertEqual(
-            ["3.7", "3.8", "3.9", "3.10"],
+            ["3.7", "3.8", "3.9", "3.10", "3.11"],
             [
                 v
                 for v in stdlibs.KNOWN_VERSIONS
