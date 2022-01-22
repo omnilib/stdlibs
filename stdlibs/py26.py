@@ -97,6 +97,7 @@ module_names = frozenset(
         "_Win",
         "__builtin__",
         "__future__",
+        "__hello__",
         "__phello__",
         "_abcoll",
         "_ast",
