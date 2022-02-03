@@ -1,6 +1,21 @@
 stdlibs
 =======
 
+v2022.2.2
+---------
+
+Feature release
+
+- Added stdlibs for 3.11 (#6)
+- Updated release URLs (#5)
+
+```
+$ git shortlog -s v2021.4.1...v2022.2.2
+     8	John Reese
+     3	Tim Hatch
+```
+
+
 v2021.4.1
 ---------
 
@@ -41,7 +56,7 @@ Initial release
 * That's it. That's the package.
 
 ```
-$ git shortlog -s 2dac1496bfe351870602bccd92da8b34d18a856b...v2021.3.25
-     1	John Reese
+$ git shortlog -s v2021.3.25
+     5	John Reese
 ```
 
