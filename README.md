@@ -83,9 +83,14 @@ $ pip install stdlibs
 Regenerating
 ------------
 
-If you need to regenerate the list, install libcst, add the url to
-`stdlibs/fetch.py`, and run that file.  Make sure any new versions are added to
-`KNOWN_VERSIONS`.
+Add or update the list of releases and download URLs in `stdlibs/fetch.py`, then
+execute the `stdlibs.fetch` module:
+
+```shell-session
+$ make distclean virtualenv
+$ source .venv/bin/activate
+(.venv) $ python -m stdlibs.fetch
+```
 
 
 License

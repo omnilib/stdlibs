@@ -9,35 +9,30 @@ __author__ = "John Reese"
 
 import importlib
 import sys
-from typing import FrozenSet, Optional
+from typing import FrozenSet, List, Optional
+
+from . import known
 
 from .__version__ import __version__
-from .py3 import module_names
 
 ALL = "all"
+"""Combined 3.x and 2.x stdlibs"""
 
-KNOWN_VERSIONS = [
-    "2.3",
-    "2.4",
-    "2.5",
-    "2.6",
-    "2.7",
-    "3.0",
-    "3.1",
-    "3.2",
-    "3.3",
-    "3.4",
-    "3.5",
-    "3.6",
-    "3.7",
-    "3.8",
-    "3.9",
-    "3.10",
-    "3.11",
-]
+KNOWN_VERSIONS: List[str] = known.KNOWN_VERSIONS
+"""All supported Python major releases"""
 
 
 def stdlib_module_names(version: Optional[str] = None) -> FrozenSet[str]:
+    """
+    Return a set of known module names for a Python release in :data:`.KNOWN_VERSIONS`.
+
+    If passed :data:`stdlibs.ALL`, this returns :data:`stdlibs.py.module_names`.
+    If passed ``None``, or no arguments, returns the equivalent module names for the
+    active major Python version.
+
+    Prefer using :data:`stdlibs.module_names` or a specific
+    :ref:`Versioned Module <versioned>` directly.
+    """
     if version is None:
         version = "%d%d" % sys.version_info[:2]
         modname = f".py{version}"
@@ -50,7 +45,17 @@ def stdlib_module_names(version: Optional[str] = None) -> FrozenSet[str]:
     return importlib.import_module(modname, __package__).module_names  # type: ignore
 
 
+module_names: FrozenSet[str] = stdlib_module_names("3")
+"""
+Known stdlibs for any release of Python 3.x
+
+Shortcut for :data:`stdlibs.py3.module_names`.
+"""
+
+
 __all__ = [
-    "stdlib_module_names",
+    "ALL",
+    "KNOWN_VERSIONS",
     "module_names",
+    "stdlib_module_names",
 ]
