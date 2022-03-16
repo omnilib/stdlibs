@@ -1,6 +1,23 @@
 stdlibs
 =======
 
+v2022.3.16
+----------
+
+Maintenance release
+
+* Updated fetch script to generate docs
+* Generated doc site using Sphinx and RTD
+* Improved readme overview
+* Ownership tranferred to Omnilib Project
+
+```
+$ git shortlog -s v2022.2.2...v2022.3.16
+     7	John Reese
+     6	dependabot[bot]
+```
+
+
 v2022.2.2
 ---------
 
