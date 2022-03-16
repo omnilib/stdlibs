@@ -2,6 +2,11 @@
 
 Simple list of top-level packages in Python's stdlib
 
+[![license](https://img.shields.io/pypi/l/stdlibs.svg)](https://github.com/omnilib/stdlibs/blob/master/LICENSE)
+[![version](https://img.shields.io/pypi/v/stdlibs.svg)](https://pypi.org/project/stdlibs)
+[![changelog](https://img.shields.io/badge/change-log-blue)](https://stdlibs.omnilib.dev/en/latest/changelog.html)
+[![documentation](https://readthedocs.org/projects/stdlibs/badge/?version=latest)](https://stdlibs.omnilib.dev)
+
 Note: If you only need the live module names on 3.10+, just use
 `sys.stdlib_module_names`.  This is not exactly a backport, but a static list of
 those for most useful Python versions.
