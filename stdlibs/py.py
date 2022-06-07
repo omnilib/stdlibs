@@ -552,6 +552,7 @@ module_names: FrozenSet[str] = frozenset(
         "toaiff",
         "token",
         "tokenize",
+        "tomllib",
         "torgb",
         "trace",
         "traceback",

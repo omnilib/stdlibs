@@ -298,6 +298,7 @@ module_names: FrozenSet[str] = frozenset(
         "tkinter",
         "token",
         "tokenize",
+        "tomllib",
         "trace",
         "traceback",
         "tracemalloc",
