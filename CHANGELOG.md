@@ -1,6 +1,21 @@
 stdlibs
 =======
 
+v2022.6.8
+---------
+
+Maintenance release
+
+- Update catalog for 3.11 betas (#25)
+
+```
+$ git shortlog -s v2022.3.16...v2022.6.8
+     2	John Reese
+     2	Tim Hatch
+     3	dependabot[bot]
+```
+
+
 v2022.3.16
 ----------
 
