@@ -1,11 +1,11 @@
-# Copyright 2021 John Reese
+# Copyright 2022 Amethyst Reese
 # Licensed under the MIT license
 
 """
 List of packages in the stdlib
 """
 
-__author__ = "John Reese"
+__author__ = "Amethyst Reese"
 
 import importlib
 import sys
