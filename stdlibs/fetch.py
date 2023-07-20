@@ -272,7 +272,9 @@ class ExtensionVisitor(cst.CSTVisitor):
         )
         if d:
             assert isinstance(d["extension_name"], cst.SimpleString)
-            self.extension_names.append(d["extension_name"].evaluated_value)
+            self.extension_names.append(
+                cst.ensure_type(d["extension_name"].evaluated_value, str)
+            )
 
     def visit_Assign(self, node: cst.Assign) -> None:
         d = m.extract(
@@ -286,7 +288,9 @@ class ExtensionVisitor(cst.CSTVisitor):
             assert isinstance(d["list"], cst.List)
             for item in d["list"].elements:
                 if isinstance(item.value, cst.SimpleString):
-                    self.extension_names.append(item.value.evaluated_value)
+                    self.extension_names.append(
+                        cst.ensure_type(item.value.evaluated_value, str)
+                    )
 
 
 # This is from usort

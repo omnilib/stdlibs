@@ -1,15 +1,15 @@
 [build-system]
-requires = ["flit_core >=3,<4"]
+requires = ["flit_core >=3.8,<4"]
 build-backend = "flit_core.buildapi"
 
-[tool.flit.metadata]
-module = "stdlibs"
-author = "Amethyst Reese"
-author-email = "amy@noswap.com"
-description-file = "README.md"
-home-page = "https://stdlibs.omnilib.dev"
-requires = []
-requires-python = ">=3.7"
+[project]
+name = "stdlibs"
+readme = "README.md"
+license = {file="LICENSE"}
+dynamic = ["version", "description"]
+authors = [
+    {name="Amethyst Reese", email="amy@n7.gg"},
+]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
@@ -17,8 +17,27 @@ classifiers = [
     "Topic :: Utilities",
     "Typing :: Typed",
 ]
+requires-python = ">=3.8"
+dependencies = []
 
-[tool.flit.metadata.urls]
+[project.optional-dependencies]
+dev = [
+    "attribution==1.6.2",
+    "black==23.10.1",
+    "coverage==6.5.0",
+    "flit==3.9.0",
+    "flake8==5.0.4",
+    "mypy==1.5",
+    "ufmt==2.3.0",
+    "usort==1.0.7",
+]
+docs = [
+    "sphinx==6.2.1",
+    "sphinx-mdinclude==0.5.3",
+]
+
+[project.urls]
+Homepage = "https://stdlibs.omnilib.dev"
 Documentation = "https://stdlibs.omnilib.dev/en/latest/"
 Github = "https://github.com/omnilib/stdlibs"
 
@@ -30,6 +49,7 @@ exclude = [
 [tool.attribution]
 name = "stdlibs"
 package = "stdlibs"
+ignored_authors = ["dependabot"]
 version_file = true
 signed_tags = true
 
