@@ -94,7 +94,6 @@ module_names: FrozenSet[str] = frozenset(
         "_testimportmultiple",
         "_testinternalcapi",
         "_testmultiphase",
-        "_testmultiphase_nonascii_latin",
         "_thread",
         "_threading_local",
         "_tkinter",
