@@ -91,6 +91,7 @@ module_names: FrozenSet[str] = frozenset(
         "_symtable",
         "_testbuffer",
         "_testcapi",
+        "_testclinic",
         "_testconsole",
         "_testimportmultiple",
         "_testinternalcapi",

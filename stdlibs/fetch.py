@@ -32,7 +32,8 @@ RELEASES = {
     "3.8": "https://www.python.org/ftp/python/3.8.8/Python-3.8.8.tgz",
     "3.9": "https://www.python.org/ftp/python/3.9.5/Python-3.9.5.tgz",
     "3.10": "https://www.python.org/ftp/python/3.10.2/Python-3.10.2.tgz",
-    "3.11": "https://www.python.org/ftp/python/3.11.0/Python-3.11.0b1.tgz",
+    "3.11": "https://www.python.org/ftp/python/3.11.5/Python-3.11.5.tgz",
+    "3.12": "https://www.python.org/ftp/python/3.12.0/Python-3.12.0rc3.tgz",
 }
 
 MODULE_DEF_RE = re.compile(r"PyModuleDef .*? = \{\s*[^,]*,\s*([^,}]+)[,}]")
