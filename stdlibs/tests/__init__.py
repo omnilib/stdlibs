@@ -4,7 +4,7 @@
 import os
 import sys
 from pathlib import Path
-from unittest import mock, TestCase
+from unittest import mock, skipIf, TestCase
 
 import stdlibs
 
@@ -38,6 +38,13 @@ class StdlibsTest(TestCase):
                 continue
             self.assertIn(name, names)
 
+    @skipIf(
+        not hasattr(sys, "stdlib_module_names"), "sys.stdlib_module_names not present"
+    )
+    def test_sys_stdlib_modules_agrees(self) -> None:
+        names = stdlibs.stdlib_module_names(None)
+        self.assertEqual(frozenset(), sys.stdlib_module_names - names)  # type: ignore
+
     def test_all23(self) -> None:
         self.assertEqual(
             stdlibs.stdlib_module_names("2") | stdlibs.stdlib_module_names("3"),
@@ -46,7 +53,7 @@ class StdlibsTest(TestCase):
 
     def test_readme_example(self) -> None:
         self.assertEqual(
-            ["3.7", "3.8", "3.9", "3.10", "3.11"],
+            ["3.7", "3.8", "3.9", "3.10", "3.11", "3.12"],
             [
                 v
                 for v in stdlibs.KNOWN_VERSIONS
