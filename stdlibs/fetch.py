@@ -32,11 +32,13 @@ RELEASES = {
     "3.8": "https://www.python.org/ftp/python/3.8.8/Python-3.8.8.tgz",
     "3.9": "https://www.python.org/ftp/python/3.9.5/Python-3.9.5.tgz",
     "3.10": "https://www.python.org/ftp/python/3.10.2/Python-3.10.2.tgz",
-    "3.11": "https://www.python.org/ftp/python/3.11.0/Python-3.11.0b1.tgz",
+    "3.11": "https://www.python.org/ftp/python/3.11.5/Python-3.11.5.tgz",
+    "3.12": "https://www.python.org/ftp/python/3.12.0/Python-3.12.0rc3.tgz",
 }
 
 MODULE_DEF_RE = re.compile(r"PyModuleDef .*? = \{\s*[^,]*,\s*([^,}]+)[,}]")
-MULTILINE_COMMENT_RE = re.compile(r"/\*.*?\*/")
+MODULE_NAME_CONSTANT_RE = re.compile(r"#define\s*MODULE_NAME\s*\"([^\"]+)\"")
+MULTILINE_COMMENT_RE = re.compile(r"/\*.*?\*/|//.*")
 PY2_INITMODULE_RE = re.compile(r".Py_InitModule\d?\(\s*(?!\))(.*?),")
 INITTAB_SELECTOR_RE = re.compile(
     r"(?:struct _(?:frozen|module_alias) .*?|_PyImport_\w+)\[\] = \{([\w\W]+?)\n\};"
@@ -180,12 +182,15 @@ def regen(version: str) -> Set[str]:
     elif version.startswith("2"):
         setup_path = base_path / "fixed" / "setup.py"
 
-    module = try_parse(setup_path)
-    ev = ExtensionVisitor()
-    module.visit(ev)
-
     # Python files
-    names = ev.extension_names[:]
+    names = []
+    if setup_path.exists():
+        module = try_parse(setup_path)
+        ev = ExtensionVisitor()
+        module.visit(ev)
+
+        names = [e for e in ev.extension_names if e != "_dummy"]
+
     for p in (base_path / "Lib").glob("*"):
         if p.name.startswith(("plat-", "lib-")):
             # 2.x platform dirs, or tk support
@@ -210,23 +215,46 @@ def regen(version: str) -> Set[str]:
         "Modules",  # other extensions, some of which are built-in :/
         "PC",  # windows
     ):
-        for p in (base_path / subdir).glob("*.c"):
+        for p in (base_path / subdir).rglob("**/*.c"):
             try:
                 data = p.read_text()
             except UnicodeDecodeError:
                 data = p.read_text(encoding="latin-1")
 
             match = MODULE_DEF_RE.search(data) or PY2_INITMODULE_RE.search(data)
+
             if match:
                 s = MULTILINE_COMMENT_RE.sub("", match.group(1)).strip()
                 if s.startswith(".m_name"):
                     s = s.split("=")[1].strip()
+                if s == '"example"':
+                    continue  # PC/example_nt/example.c <= 3.1
 
-                if s.startswith('"') and s.endswith('"'):
-                    names.append(s.strip('"'))
-                elif p.name in ("_warnings.c", "_sre.c", "pyexpat.c", "_bsddb.c"):
+                if (
+                    (s == '"decimal"' and p.name == "_decimal.c")
+                    or (s == '"_fuzz"' and p.name == "_xxtestfuzz.c")
+                    or p.name == "_testmultiphase.c"
+                ):
+                    # these have confusing/wrong m_name
                     names.append(p.with_suffix("").name)
-                elif p.name in ("socketmodule.c", "posixmodule.c"):
+                elif s.startswith('"') and s.endswith('"'):
+                    names.append(s.strip('"').split(".")[0])  # sys.monitoring in 3.12
+                elif s == "MODULE_NAME":
+                    constant_match = MODULE_NAME_CONSTANT_RE.search(data)
+                    if constant_match:
+                        names.append(constant_match.group(1))
+                    else:
+                        print(f"Unknown module constant for {s} in {p}, skipped")
+                elif p.name in (
+                    "_warnings.c",
+                    "_sre.c",
+                    "pyexpat.c",
+                    "_bsddb.c",
+                ):
+                    names.append(p.with_suffix("").name)
+                elif p.name == "socketmodule.c":
+                    names.append("_socket")
+                elif p.name in ("posixmodule.c",):
                     names.append(p.name.split("module")[0])
                 else:
                     print(f"Unknown module for {s} in {p}, skipped")
@@ -323,4 +351,8 @@ def try_parse(path: Path, data: Optional[bytes] = None) -> cst.Module:
 
 
 if __name__ == "__main__":
-    regen_all()
+    if len(sys.argv) < 2:
+        regen_all()
+    else:
+        print("WARNING: For testing only!")
+        regen(sys.argv[1])
