@@ -27,7 +27,7 @@ Maintenance release
 
 ```text
 $ git shortlog -s v2022.3.16...v2022.6.8
-     2	John Reese
+     2	Amethyst Reese
      2	Tim Hatch
      3	dependabot[bot]
 ```
@@ -45,7 +45,7 @@ Maintenance release
 
 ```text
 $ git shortlog -s v2022.2.2...v2022.3.16
-     7	John Reese
+     7	Amethyst Reese
      6	dependabot[bot]
 ```
 
@@ -60,7 +60,7 @@ Feature release
 
 ```text
 $ git shortlog -s v2021.4.1...v2022.2.2
-     8	John Reese
+     8	Amethyst Reese
      3	Tim Hatch
 ```
 
@@ -75,7 +75,7 @@ Bugfix release
 
 ```text
 $ git shortlog -s v2021.3.30...v2021.4.1
-     3	John Reese
+     3	Amethyst Reese
      2	Tim Hatch
 ```
 
@@ -91,7 +91,7 @@ Feature release
 
 ```text
 $ git shortlog -s v2021.3.25...v2021.3.30
-     5	John Reese
+     5	Amethyst Reese
      8	Tim Hatch
 ```
 
@@ -106,7 +106,7 @@ Initial release
 
 ```text
 $ git shortlog -s v2021.3.25
-     5	John Reese
+     5	Amethyst Reese
 ```
 
 [attribution-badge]:
