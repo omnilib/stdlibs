@@ -28,12 +28,13 @@ RELEASES = {
     "3.4": "https://www.python.org/ftp/python/3.4.10/Python-3.4.10.tgz",
     "3.5": "https://www.python.org/ftp/python/3.5.10/Python-3.5.10.tgz",
     "3.6": "https://www.python.org/ftp/python/3.6.13/Python-3.6.13.tgz",
-    "3.7": "https://www.python.org/ftp/python/3.7.10/Python-3.7.10.tgz",
-    "3.8": "https://www.python.org/ftp/python/3.8.8/Python-3.8.8.tgz",
-    "3.9": "https://www.python.org/ftp/python/3.9.5/Python-3.9.5.tgz",
-    "3.10": "https://www.python.org/ftp/python/3.10.2/Python-3.10.2.tgz",
-    "3.11": "https://www.python.org/ftp/python/3.11.5/Python-3.11.5.tgz",
-    "3.12": "https://www.python.org/ftp/python/3.12.0/Python-3.12.0rc3.tgz",
+    "3.7": "https://www.python.org/ftp/python/3.7.17/Python-3.7.17.tgz",
+    "3.8": "https://www.python.org/ftp/python/3.8.18/Python-3.8.18.tgz",
+    "3.9": "https://www.python.org/ftp/python/3.9.18/Python-3.9.18.tgz",
+    "3.10": "https://www.python.org/ftp/python/3.10.13/Python-3.10.13.tgz",
+    "3.11": "https://www.python.org/ftp/python/3.11.7/Python-3.11.7.tgz",
+    "3.12": "https://www.python.org/ftp/python/3.12.1/Python-3.12.1.tgz",
+    "3.13": "https://www.python.org/ftp/python/3.13.0/Python-3.13.0a2.tgz",
 }
 
 MODULE_DEF_RE = re.compile(r"PyModuleDef .*? = \{\s*[^,]*,\s*([^,}]+)[,}]")
@@ -256,6 +257,8 @@ def regen(version: str) -> Set[str]:
                     names.append("_socket")
                 elif p.name in ("posixmodule.c",):
                     names.append(p.name.split("module")[0])
+                elif p.as_posix().endswith("_sre/sre.c"):
+                    names.append("_sre")
                 else:
                     print(f"Unknown module for {s} in {p}, skipped")
 
