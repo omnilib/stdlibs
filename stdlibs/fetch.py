@@ -9,32 +9,15 @@ from typing import List, Optional, Set
 
 import libcst as cst
 import libcst.matchers as m
+import toml
 
 BASE_DIR = (Path.cwd() / Path(__file__)).parent
 KNOWN_FILE = BASE_DIR / "known.py"
 DOCS_DIR = BASE_DIR.parent / "docs"
 API_FILE = DOCS_DIR / "api.rst"
+RELEASES_FILE = BASE_DIR / "releases.toml"
 
-RELEASES = {
-    "2.3": "https://www.python.org/ftp/python/2.3.7/Python-2.3.7.tgz",
-    "2.4": "https://www.python.org/ftp/python/2.4.6/Python-2.4.6.tgz",
-    "2.5": "https://www.python.org/ftp/python/2.5.6/Python-2.5.6.tgz",
-    "2.6": "https://www.python.org/ftp/python/2.6.9/Python-2.6.9.tgz",
-    "2.7": "https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz",
-    "3.0": "https://www.python.org/ftp/python/3.0.1/Python-3.0.1.tgz",
-    "3.1": "https://www.python.org/ftp/python/3.1.5/Python-3.1.5.tgz",
-    "3.2": "https://www.python.org/ftp/python/3.2.6/Python-3.2.6.tgz",
-    "3.3": "https://www.python.org/ftp/python/3.3.7/Python-3.3.7.tgz",
-    "3.4": "https://www.python.org/ftp/python/3.4.10/Python-3.4.10.tgz",
-    "3.5": "https://www.python.org/ftp/python/3.5.10/Python-3.5.10.tgz",
-    "3.6": "https://www.python.org/ftp/python/3.6.13/Python-3.6.13.tgz",
-    "3.7": "https://www.python.org/ftp/python/3.7.10/Python-3.7.10.tgz",
-    "3.8": "https://www.python.org/ftp/python/3.8.8/Python-3.8.8.tgz",
-    "3.9": "https://www.python.org/ftp/python/3.9.5/Python-3.9.5.tgz",
-    "3.10": "https://www.python.org/ftp/python/3.10.2/Python-3.10.2.tgz",
-    "3.11": "https://www.python.org/ftp/python/3.11.5/Python-3.11.5.tgz",
-    "3.12": "https://www.python.org/ftp/python/3.12.0/Python-3.12.0rc3.tgz",
-}
+RELEASES = toml.loads(RELEASES_FILE.read_text())
 
 MODULE_DEF_RE = re.compile(r"PyModuleDef .*? = \{\s*[^,]*,\s*([^,}]+)[,}]")
 MODULE_NAME_CONSTANT_RE = re.compile(r"#define\s*MODULE_NAME\s*\"([^\"]+)\"")
@@ -52,7 +35,6 @@ PY2_LINES_TO_OMIT = [
     "for fw in ('Tcl', 'Tk')",
     "for H in 'Headers', 'Versions/Current/PrivateHeaders'",
 ]
-
 
 with open(__file__) as f:
     MY_COPYRIGHT_HEADER = ""
@@ -256,6 +238,8 @@ def regen(version: str) -> Set[str]:
                     names.append("_socket")
                 elif p.name in ("posixmodule.c",):
                     names.append(p.name.split("module")[0])
+                elif p.as_posix().endswith("_sre/sre.c"):
+                    names.append("_sre")
                 else:
                     print(f"Unknown module for {s} in {p}, skipped")
 
