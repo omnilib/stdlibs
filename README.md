@@ -94,12 +94,17 @@ easier:
 Regenerating
 ------------
 
-Add or update the list of releases and download URLs in `stdlibs/fetch.py`, then
-execute the `stdlibs.fetch` module:
+If there might have been new release tarballs, first execute
+`stdlibs.fetch_releases` which will update `stdlibs/releases.toml`.
+
+Then execute `stdlibs.fetch` which will download all those release tarballs, and
+create/update the appropriate `stdlibs/py*.py` files with the changes.  A fresh
+run takes about two minutes, but is much faster on subsequent runs.
 
 ```shell-session
 $ make distclean virtualenv
 $ source .venv/bin/activate
+(.venv) $ python -m stdlibs.fetch_releases
 (.venv) $ python -m stdlibs.fetch
 ```
 
