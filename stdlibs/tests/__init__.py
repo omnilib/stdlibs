@@ -5,7 +5,7 @@ import doctest
 import os
 import sys
 from pathlib import Path
-from unittest import mock, skipIf, TestCase
+from unittest import mock, skipIf, TestCase, TestLoader, TestSuite
 
 import stdlibs
 
@@ -53,6 +53,6 @@ class StdlibsTest(TestCase):
         )
 
 
-def load_tests(loader, tests, ignore):
+def load_tests(loader: TestLoader, tests: TestSuite, _pattern: None) -> TestSuite:
     tests.addTests(doctest.DocFileSuite("../../README.md"))
     return tests
