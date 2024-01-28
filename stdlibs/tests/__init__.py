@@ -1,10 +1,11 @@
 # Copyright 2022 Amethyst Reese
 # Licensed under the MIT license
 
+import doctest
 import os
 import sys
 from pathlib import Path
-from unittest import mock, skipIf, TestCase
+from unittest import mock, skipIf, TestCase, TestLoader, TestSuite
 
 import stdlibs
 
@@ -51,12 +52,7 @@ class StdlibsTest(TestCase):
             stdlibs.stdlib_module_names("all"),
         )
 
-    def test_readme_example(self) -> None:
-        self.assertEqual(
-            ["3.7", "3.8", "3.9", "3.10", "3.11", "3.12", "3.13"],
-            [
-                v
-                for v in stdlibs.KNOWN_VERSIONS
-                if "dataclasses" in stdlibs.stdlib_module_names(v)
-            ],
-        )
+
+def load_tests(loader: TestLoader, tests: TestSuite, _pattern: None) -> TestSuite:
+    tests.addTests(doctest.DocFileSuite("../../README.md"))
+    return tests
