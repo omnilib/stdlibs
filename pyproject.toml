@@ -30,7 +30,7 @@ dev = [
     "mypy==1.8.0",
     "packaging==23.2",
     "ufmt==2.3.0",
-    "usort==1.0.7",
+    "usort==1.0.8.post1",
 ]
 docs = [
     "sphinx==7.2.6",
