@@ -29,7 +29,7 @@ dev = [
     "flit==3.9.0",
     "mypy==1.10.0",
     "packaging==23.2",
-    "ufmt==2.3.0",
+    "ufmt==2.6.0",
     "usort==1.0.8.post1",
 ]
 docs = [
