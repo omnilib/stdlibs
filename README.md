@@ -64,7 +64,7 @@ easier:
 ```pycon
 >>> from stdlibs import stdlib_module_names, KNOWN_VERSIONS
 >>> [v for v in KNOWN_VERSIONS if "dataclasses" in stdlib_module_names(v)]
-['3.7', '3.8', '3.9', '3.10', '3.11', '3.12', '3.13']
+['3.7', '3.8', '3.9', '3.10', '3.11', '3.12', '3.13', '3.14']
 >>>
 >>> sorted(stdlib_module_names("3.7") - stdlib_module_names("3.6"))
 ['_abc', '_contextvars', '_py_abc', '_queue', '_uuid', '_xxtestfuzz', 'contextvars', 'dataclasses']
