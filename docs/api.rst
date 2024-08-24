@@ -37,6 +37,11 @@ Generated modules for each major Python release in :data:`.KNOWN_VERSIONS`.
 .. autodata:: module_names
     :no-value:
 
+.. module:: stdlibs.py314
+
+.. autodata:: module_names
+    :no-value:
+
 .. module:: stdlibs.py313
 
 .. autodata:: module_names
