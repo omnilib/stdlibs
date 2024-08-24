@@ -236,7 +236,12 @@ def regen(version: str) -> Set[str]:
                     names.append(p.with_suffix("").name)
                 elif p.name == "socketmodule.c":
                     names.append("_socket")
-                elif p.name in ("posixmodule.c",):
+                elif p.name in (
+                    "posixmodule.c",
+                    "_interpretersmodule.c",
+                    "_interpqueuesmodule.c",
+                    "_interpchannelsmodule.c",
+                ):
                     names.append(p.name.split("module")[0])
                 elif p.as_posix().endswith("_sre/sre.c"):
                     names.append("_sre")
