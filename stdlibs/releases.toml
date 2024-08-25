@@ -18,5 +18,6 @@
 "3.9" = "https://www.python.org/ftp/python/3.9.19/Python-3.9.19.tgz"
 "3.10" = "https://www.python.org/ftp/python/3.10.14/Python-3.10.14.tgz"
 "3.11" = "https://www.python.org/ftp/python/3.11.9/Python-3.11.9.tgz"
-"3.12" = "https://www.python.org/ftp/python/3.12.3/Python-3.12.3.tgz"
-"3.13" = "https://www.python.org/ftp/python/3.13.0/Python-3.13.0b1.tgz"
+"3.12" = "https://www.python.org/ftp/python/3.12.5/Python-3.12.5.tgz"
+"3.13" = "https://www.python.org/ftp/python/3.13.0/Python-3.13.0rc1.tgz"
+"3.14" = "https://www.python.org/ftp/python/3.14.0/Python-3.14.0a0.tgz"

@@ -99,6 +99,7 @@ module_names: FrozenSet[str] = frozenset(
         "_sysconfig",
         "_testbuffer",
         "_testcapi",
+        "_testcapi_datetime",
         "_testclinic",
         "_testclinic_limited",
         "_testconsole",
