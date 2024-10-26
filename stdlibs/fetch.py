@@ -146,7 +146,7 @@ def regen(version: str) -> Set[str]:
                 [
                     sys.executable,
                     "-m",
-                    "lib2to3",
+                    "fissix",
                     "-n",
                     "-w",
                     "-o",
