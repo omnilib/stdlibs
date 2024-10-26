@@ -1,16 +1,30 @@
-EXTRAS:=dev,docs
 SRCS:=stdlibs
+EXTRAS:=dev,docs
+
+ifeq ($(OS),Windows_NT)
+    ACTIVATE:=.venv/Scripts/activate
+else
+    ACTIVATE:=.venv/bin/activate
+endif
+
+UV:=$(shell uv --version)
+ifdef UV
+	VENV:=uv venv
+	PIP:=uv pip
+else
+	VENV:=python -m venv
+	PIP:=python -m pip
+endif
 
 .venv:
-	python -m venv .venv
-	source .venv/bin/activate && make install
-	echo 'run `source .venv/bin/activate` to use virtualenv'
+	$(VENV) .venv
 
 venv: .venv
+	source $(ACTIVATE) && make install
+	echo 'run `source $(ACTIVATE)` to use virtualenv'
 
 install:
-	python -m pip install -U pip
-	python -m pip install -Ue .[$(EXTRAS)]
+	$(PIP) install -Ue .[$(EXTRAS)]
 
 release: lint test clean
 	flit publish
