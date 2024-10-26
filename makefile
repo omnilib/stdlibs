@@ -15,6 +15,10 @@ install:
 release: lint test clean
 	flit publish
 
+regenerate:
+	python -m stdlibs.fetch_releases
+	python -m stdlibs.fetch
+
 format:
 	python -m ufmt format $(SRCS)
 
