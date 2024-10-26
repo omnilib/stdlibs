@@ -108,6 +108,7 @@ module_names: FrozenSet[str] = frozenset(
         "_weakref",
         "_weakrefset",
         "_winapi",
+        "_wmi",
         "_xxinterpchannels",
         "_xxsubinterpreters",
         "_xxtestfuzz",

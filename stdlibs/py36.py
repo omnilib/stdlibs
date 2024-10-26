@@ -36,6 +36,7 @@ module_names: FrozenSet[str] = frozenset(
         "_datetime",
         "_dbm",
         "_decimal",
+        "_distutils_findvs",
         "_dummy_thread",
         "_elementtree",
         "_frozen_importlib",
