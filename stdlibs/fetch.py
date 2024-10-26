@@ -4,6 +4,7 @@
 import re
 import subprocess
 import sys
+from itertools import chain
 from pathlib import Path
 from typing import List, Optional, Set
 
@@ -197,7 +198,9 @@ def regen(version: str) -> Set[str]:
         "Modules",  # other extensions, some of which are built-in :/
         "PC",  # windows
     ):
-        for p in (base_path / subdir).rglob("**/*.c"):
+        for p in chain(
+            (base_path / subdir).rglob("*.c"), (base_path / subdir).rglob("*.cpp")
+        ):
             try:
                 data = p.read_text()
             except UnicodeDecodeError:
