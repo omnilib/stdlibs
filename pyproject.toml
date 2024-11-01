@@ -28,7 +28,7 @@ dev = [
     "coverage==7.6.1",
     "fissix==24.4.24",
     "flake8==7.1.1",
-    "flit==3.9.0",
+    "flit==3.10.0",
     "mypy==1.13.0",
     "packaging==24.1",
     "ufmt==2.8.0",
