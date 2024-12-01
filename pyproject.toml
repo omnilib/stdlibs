@@ -30,7 +30,7 @@ dev = [
     "flake8==7.1.1",
     "flit==3.9.0",
     "mypy==1.13.0",
-    "packaging==24.1",
+    "packaging==24.2",
     "ufmt==2.8.0",
     "usort==1.0.8.post1",
 ]
