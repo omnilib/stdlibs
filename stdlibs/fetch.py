@@ -217,6 +217,7 @@ def regen(version: str) -> Set[str]:
 
                 if (
                     (s == '"decimal"' and p.name == "_decimal.c")
+                    or (s == '"peg_parser"' and p.name == "_peg_parser.c")
                     or (s == '"_fuzz"' and p.name == "_xxtestfuzz.c")
                     or p.name == "_testmultiphase.c"
                 ):

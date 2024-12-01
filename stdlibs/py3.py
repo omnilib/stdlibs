@@ -278,7 +278,6 @@ module_names: FrozenSet[str] = frozenset(
         "pathlib",
         "pcre",
         "pdb",
-        "peg_parser",
         "pickle",
         "pickletools",
         "pipes",

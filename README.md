@@ -42,7 +42,7 @@ superset of top-level names you may have, and a superset of those in
 >>> from stdlibs import module_names
 >>> print("os" in module_names)
 True
->>> print("peg_parser" in module_names)  # 3.9+
+>>> print("zoneinfo" in module_names)  # 3.9+
 True
 
 ```
@@ -53,7 +53,7 @@ If you need a specific version, those are available as other modules:
 >>> from stdlibs.py36 import module_names as module_names_py36
 >>> print("os" in module_names_py36)
 True
->>> print("peg_parser" in module_names_py36)
+>>> print("zoneinfo" in module_names_py36)
 False
 
 ```
