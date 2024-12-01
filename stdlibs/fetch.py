@@ -24,6 +24,7 @@ MODULE_DEF_RE = re.compile(r"PyModuleDef .*? = \{\s*[^,]*,\s*([^,}]+)[,}]")
 MODULE_NAME_CONSTANT_RE = re.compile(r"#define\s*MODULE_NAME\s*\"([^\"]+)\"")
 MULTILINE_COMMENT_RE = re.compile(r"/\*.*?\*/|//.*")
 PY2_INITMODULE_RE = re.compile(r".Py_InitModule\d?\(\s*(?!\))(.*?),")
+PY3_INITMODULE_RE = re.compile(r"PyInit_([a-zA-Z0-9_]+)\(void\)")
 INITTAB_SELECTOR_RE = re.compile(
     r"(?:struct _(?:frozen|module_alias) .*?|_PyImport_\w+)\[\] = \{([\w\W]+?)\n\};"
 )
@@ -250,6 +251,11 @@ def regen(version: str) -> Set[str]:
                     names.append("_sre")
                 else:
                     print(f"Unknown module for {s} in {p}, skipped")
+
+            if "config" not in p.name and not p.name.startswith("_test"):
+                for name in PY3_INITMODULE_RE.findall(data):
+                    if name not in names:
+                        print(f"Missing {name} for {p}")
 
     # Some names are listed differently/better here; cjkcodecs and _io/io
     for path in (
