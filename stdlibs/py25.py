@@ -127,6 +127,7 @@ module_names: FrozenSet[str] = frozenset(
         "_md5",
         "_msi",
         "_multibytecodec",
+        "_pybsddb",
         "_random",
         "_sha",
         "_sha256",

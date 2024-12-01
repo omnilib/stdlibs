@@ -120,6 +120,7 @@ module_names: FrozenSet[str] = frozenset(
         "_hotshot",
         "_locale",
         "_multibytecodec",
+        "_pybsddb",
         "_random",
         "_socket",
         "_sre",

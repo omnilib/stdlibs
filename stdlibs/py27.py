@@ -133,6 +133,7 @@ module_names: FrozenSet[str] = frozenset(
         "_multibytecodec",
         "_multiprocessing",
         "_osx_support",
+        "_pybsddb",
         "_pyio",
         "_random",
         "_scproxy",

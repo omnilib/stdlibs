@@ -181,6 +181,7 @@ module_names: FrozenSet[str] = frozenset(
         "_posixshmem",
         "_posixsubprocess",
         "_py_abc",
+        "_pybsddb",
         "_pydatetime",
         "_pydecimal",
         "_pyio",
