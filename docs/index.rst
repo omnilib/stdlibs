@@ -5,5 +5,6 @@
     :maxdepth: 1
 
     api
+    inclusion
     changelog
 
