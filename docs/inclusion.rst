@@ -12,7 +12,7 @@ We haven't seen a compelling reason to add code to:
 * special-case test names other than the top-level "test"
 * handle sub-modules
 * include names that only existed for prerelease, after a final is out
-* use any finer granularity than *major*.*minor* [and in fact, the simplest use is just *major*]
+* use any finer granularity than *major.minor* [and in fact, the simplest use is just *major*]
 
 The intended audience is people writing tools that need to understand imports,
 such as import sorters or dependency checkers, to be able to know which names
