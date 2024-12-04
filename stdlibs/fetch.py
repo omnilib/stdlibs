@@ -24,6 +24,7 @@ MODULE_DEF_RE = re.compile(r"PyModuleDef .*? = \{\s*[^,]*,\s*([^,}]+)[,}]")
 MODULE_NAME_CONSTANT_RE = re.compile(r"#define\s*MODULE_NAME\s*\"([^\"]+)\"")
 MULTILINE_COMMENT_RE = re.compile(r"/\*.*?\*/|//.*")
 PY2_INITMODULE_RE = re.compile(r".Py_InitModule\d?\(\s*(?!\))(.*?),")
+PY3_INITMODULE_RE = re.compile(r"PyInit_([a-zA-Z0-9_]+)\(void\)")
 INITTAB_SELECTOR_RE = re.compile(
     r"(?:struct _(?:frozen|module_alias) .*?|_PyImport_\w+)\[\] = \{([\w\W]+?)\n\};"
 )
@@ -223,8 +224,18 @@ def regen(version: str) -> Set[str]:
                 ):
                     # these have confusing/wrong m_name
                     names.append(p.with_suffix("").name)
+                elif p.name in (
+                    "posixmodule.c",
+                    "_interpretersmodule.c",
+                    "_interpqueuesmodule.c",
+                    "_interpchannelsmodule.c",
+                    "_iomodule.c",
+                ):
+                    # wrong m_name, *module* style
+                    names.append(p.name.split("module")[0])
                 elif s.startswith('"') and s.endswith('"'):
-                    names.append(s.strip('"').split(".")[0])  # sys.monitoring in 3.12
+                    # split(".")[0] for sys.monitoring in 3.12
+                    names.append(s.strip('"').split(".")[0])
                 elif s == "MODULE_NAME":
                     constant_match = MODULE_NAME_CONSTANT_RE.search(data)
                     if constant_match:
@@ -232,25 +243,26 @@ def regen(version: str) -> Set[str]:
                     else:
                         print(f"Unknown module constant for {s} in {p}, skipped")
                 elif p.name in (
+                    "_bsddb.c",
                     "_warnings.c",
                     "_sre.c",
+                    "exceptions.c",  # py2
                     "pyexpat.c",
-                    "_bsddb.c",
                 ):
                     names.append(p.with_suffix("").name)
+                    if p.name == "_bsddb.c":
+                        names.append("_pybsddb")
                 elif p.name == "socketmodule.c":
                     names.append("_socket")
-                elif p.name in (
-                    "posixmodule.c",
-                    "_interpretersmodule.c",
-                    "_interpqueuesmodule.c",
-                    "_interpchannelsmodule.c",
-                ):
-                    names.append(p.name.split("module")[0])
                 elif p.as_posix().endswith("_sre/sre.c"):
                     names.append("_sre")
                 else:
                     print(f"Unknown module for {s} in {p}, skipped")
+
+            if "config" not in p.name and not p.name.startswith("_test"):
+                for name in PY3_INITMODULE_RE.findall(data):
+                    if name not in names:
+                        print(f"Missing {name} for {p}")
 
     # Some names are listed differently/better here; cjkcodecs and _io/io
     for path in (
