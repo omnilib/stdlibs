@@ -224,7 +224,6 @@ module_names: FrozenSet[str] = frozenset(
         "parser",
         "pathlib",
         "pdb",
-        "peg_parser",
         "pickle",
         "pickletools",
         "pipes",
