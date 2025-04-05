@@ -24,7 +24,7 @@ dependencies = []
 dev = [
     "attribution==1.8.0",
     "build>=1",
-    "black==24.10.0",
+    "black==25.1.0",
     "coverage==7.6.8",
     "fissix==24.4.24",
     "flake8==7.1.1",
