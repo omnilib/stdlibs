@@ -112,6 +112,7 @@ module_names: FrozenSet[str] = frozenset(
         "_abcoll",
         "_aix_support",
         "_android_support",
+        "_apple_support",
         "_ast",
         "_asyncio",
         "_bisect",
