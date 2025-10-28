@@ -14,7 +14,9 @@ It also includes combined lists of all module names that were ever available in 
 
 Note: On Python versions 3.10 or newer, a list of module names for the active runtime
 is available `sys.stdlib_module_names`. This package exists to provide an historical
-record for use with static analysis and other tooling.
+record, including pre-release listings, for use with static analysis and other tooling.
+It also captures a number of "private", importable modules that ship with stable
+releases, but that aren't generally included in the official `stdlib_module_names`.
 
 This package only includes listings for CPython releases. If other runtimes would be
 useful, open an issue and start a discussion on how best that can be accomodated.
