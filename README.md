@@ -1,6 +1,6 @@
 # stdlibs
 
-Simple list of top-level packages in Python's stdlib
+Simple list of top-level packages in Python's standard library
 
 [![license](https://img.shields.io/pypi/l/stdlibs.svg)](https://github.com/omnilib/stdlibs/blob/master/LICENSE)
 [![version](https://img.shields.io/pypi/v/stdlibs.svg)](https://pypi.org/project/stdlibs)
@@ -20,6 +20,11 @@ releases, but that aren't generally included in the official `stdlib_module_name
 
 This package only includes listings for CPython releases. If other runtimes would be
 useful, open an issue and start a discussion on how best that can be accomodated.
+
+**stdlibs is used by**:
+
+- [Ruff](https://astral.sh/ruff)
+- [µsort](https://usort.rtfd.io)
 
 
 Install
