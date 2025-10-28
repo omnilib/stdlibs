@@ -478,6 +478,7 @@ module_names: FrozenSet[str] = frozenset(
         "pprint",
         "pre",
         "profile",
+        "profiling",
         "pstats",
         "pty",
         "pure",

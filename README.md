@@ -1,6 +1,6 @@
 # stdlibs
 
-Simple list of top-level packages in Python's stdlib
+Simple list of top-level packages in Python's standard library
 
 [![license](https://img.shields.io/pypi/l/stdlibs.svg)](https://github.com/omnilib/stdlibs/blob/master/LICENSE)
 [![version](https://img.shields.io/pypi/v/stdlibs.svg)](https://pypi.org/project/stdlibs)
@@ -14,10 +14,17 @@ It also includes combined lists of all module names that were ever available in 
 
 Note: On Python versions 3.10 or newer, a list of module names for the active runtime
 is available `sys.stdlib_module_names`. This package exists to provide an historical
-record for use with static analysis and other tooling.
+record, including pre-release listings, for use with static analysis and other tooling.
+It also captures a number of "private", importable modules that ship with stable
+releases, but that aren't generally included in the official `stdlib_module_names`.
 
 This package only includes listings for CPython releases. If other runtimes would be
 useful, open an issue and start a discussion on how best that can be accomodated.
+
+**stdlibs is used by**:
+
+- [Ruff](https://astral.sh/ruff)
+- [µsort](https://usort.rtfd.io)
 
 
 Install
@@ -64,7 +71,7 @@ easier:
 ```pycon
 >>> from stdlibs import stdlib_module_names, KNOWN_VERSIONS
 >>> [v for v in KNOWN_VERSIONS if "dataclasses" in stdlib_module_names(v)]
-['3.7', '3.8', '3.9', '3.10', '3.11', '3.12', '3.13', '3.14']
+['3.7', '3.8', '3.9', '3.10', '3.11', '3.12', '3.13', '3.14', '3.15']
 >>>
 >>> sorted(stdlib_module_names("3.7") - stdlib_module_names("3.6"))
 ['_abc', '_contextvars', '_py_abc', '_queue', '_uuid', '_xxtestfuzz', 'contextvars', 'dataclasses']
