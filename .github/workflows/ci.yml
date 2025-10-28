@@ -11,7 +11,7 @@ permissions:
   contents: read
 
 env:
-  UV_SYSTEM_PYTHON: 1
+  UV_MANAGED_PYTHON: 1
 
 jobs:
   test:
@@ -19,22 +19,16 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13", "3.14"]
         os: [macOS-latest, ubuntu-latest, windows-latest]
 
     steps:
       - name: Checkout
         uses: actions/checkout@v5
-      - name: Set Up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python-version }}
-          allow-prereleases: true
       - uses: astral-sh/setup-uv@v6
         with:
-          enable-cache: true
-          cache-dependency-glob: pyproject.toml
-          cache-suffix: ${{ matrix.python-version }}
+          activate-environment: true
+          python-version: ${{ matrix.python-version }}
       - name: Install
         run: make EXTRAS=dev install
       - name: Test
@@ -47,13 +41,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.13'
       - uses: astral-sh/setup-uv@v6
         with:
-          enable-cache: true
-          cache-dependency-glob: pyproject.toml
+          activate-environment: true
+          python-version: '3.13'
       - name: Install
         run: make EXTRAS=dev install
       - name: Build
