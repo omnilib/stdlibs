@@ -35,7 +35,10 @@ class StdlibsTest(TestCase):
         for module in Path(os.__file__).parent.glob("*.py"):
             name = module.with_suffix("").name
             name = name.split(".")[0]  # __phello__.foo
-            if name.startswith("_sysconfigdata_"):
+            if name.startswith("_sysconfigdata_") or name in (
+                "sitecustomize",
+                "usercustomize",
+            ):
                 continue
             self.assertIn(name, names)
 
