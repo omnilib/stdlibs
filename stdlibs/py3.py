@@ -80,6 +80,7 @@ module_names: FrozenSet[str] = frozenset(
         "_lsprof",
         "_lzma",
         "_markupbase",
+        "_math_integer",
         "_md5",
         "_msi",
         "_multibytecodec",

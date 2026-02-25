@@ -215,6 +215,8 @@ def regen(version: str) -> Set[str]:
                     s = s.split("=")[1].strip()
                 if s == '"example"':
                     continue  # PC/example_nt/example.c <= 3.1
+                if s == '"currently ignored"':
+                    continue  # Modules/_testcapi/module.c on 3.15a6
 
                 if (
                     (s == '"decimal"' and p.name == "_decimal.c")
