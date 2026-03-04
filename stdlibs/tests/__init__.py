@@ -36,6 +36,7 @@ class StdlibsTest(TestCase):
             name = module.with_suffix("").name
             name = name.split(".")[0]  # __phello__.foo
             if name.startswith("_sysconfigdata_") or name in (
+                "_missing_stdlib_info",
                 "sitecustomize",
                 "usercustomize",
             ):
