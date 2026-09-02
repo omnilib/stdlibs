@@ -10,6 +10,9 @@ on:
 permissions:
   contents: read
 
+env:
+  UV_MANAGED_PYTHON: 1
+
 jobs:
   test:
     runs-on: ${{ matrix.os }}
