@@ -12,7 +12,6 @@ import sys
 from typing import FrozenSet, List, Optional
 
 from . import known
-
 from .__version__ import __version__
 
 ALL = "all"
