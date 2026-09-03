@@ -26,12 +26,14 @@ dev = [
     "build>=1",
     "black>=25,<26",
     "coverage",
+    "fissix",
     "flake8",
     "flit>=4",
     "mypy",
     "packaging",
     "sphinx",
     "sphinx-mdinclude",
+    "toml",
     "ufmt",
 ]
 
