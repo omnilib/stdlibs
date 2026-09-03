@@ -625,6 +625,7 @@ module_names: FrozenSet[str] = frozenset(
         "xx",
         "xxlimited",
         "xxlimited_35",
+        "xxlimited_3_13",
         "xxsubtype",
         "zipapp",
         "zipfile",
